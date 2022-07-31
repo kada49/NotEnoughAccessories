@@ -1,14 +1,14 @@
 [
   {
-    "modid": "forgetemplate",
-    "name": "ForgeTemplate",
-    "description": "Template for a Forge 1.8.9 Mod",
+    "modid": "nea",
+    "name": "NotEnoughAccessories",
+    "description": "Description",
     "version": "${version}",
     "mcversion": "${mcVersionStr}",
     "url": "",
-    "updateUrl": "",
+    "updateUrl": "https://kada49.github.io/json/NotEnoughAccessories-updateJson.json",
     "authorList": ["kada49"],
-    "credits": "xcfrg for inspiration, the Essential Discord Server for the help",
+    "credits": "The Essential Discord Server for the help",
     "logoFile": "",
     "screenshots": [],
     "dependencies": []

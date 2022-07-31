@@ -9,13 +9,13 @@ pluginManagement {
         maven("https://repo.essential.gg/repository/maven-public")
     }
     plugins {
-        val egtVersion = "0.1.10"
+        val egtVersion = "0.1.11"
         id("gg.essential.multi-version.root") version egtVersion
     }
 }
 
 rootProject.buildFileName = "root.gradle.kts"
-rootProject.name = "ForgeTemplate"
+rootProject.name = "NotEnoughAccessories"
 
 val mcVersion = "1.8.9"
 

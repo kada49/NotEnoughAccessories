@@ -10,7 +10,7 @@ val modGroup: String by project
 val modBaseName: String by project
 group = modGroup
 base.archivesName.set(modBaseName)
-version = "1.0"
+version = "0.1"
 
 loom {
     noServerRunConfigs()
