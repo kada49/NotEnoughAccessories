@@ -2,7 +2,7 @@ package it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.event
 
 
 import gg.essential.universal.UChat
-import it.kada49.notenoughaccessories.Constants.ACTIVE_PROFILE
+import it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.configuration.Configuration.activeProfile
 import it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.configuration.Configuration.hypixelAPIKey
 import it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.util.Util.sendMessageWithPrefix
 import net.minecraft.util.EnumChatFormatting
@@ -11,7 +11,8 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
 object Chat {
-    @SubscribeEvent(priority = EventPriority.HIGHEST) @Suppress("unused")
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    @Suppress("unused")
     fun setProfileName(event: ClientChatReceivedEvent) {
         var msg = event.message.unformattedText
         msg = EnumChatFormatting.getTextWithoutFormattingCodes(msg)
@@ -21,17 +22,11 @@ object Chat {
             if (msg.contains("You are playing on profile: ")) msg = msg.replace("You are playing on profile: ", "")
             if (msg.contains("Your profile was changed to: ")) msg = msg.replace("Your profile was changed to: ", "")
 
-            if (msg != ACTIVE_PROFILE) {
-                ACTIVE_PROFILE = msg
-                UChat.chat(sendMessageWithPrefix("Profile updated to:${EnumChatFormatting.YELLOW} $ACTIVE_PROFILE"))
+            if (msg != activeProfile) {
+                activeProfile = msg
+                UChat.chat(sendMessageWithPrefix("Profile updated to:${EnumChatFormatting.YELLOW} $activeProfile"))
             }
         }
-    }
-
-    @SubscribeEvent(priority = EventPriority.HIGHEST) @Suppress("unused")
-    fun setApiKey(event: ClientChatReceivedEvent) {
-        var msg = event.message.unformattedText
-        msg = EnumChatFormatting.getTextWithoutFormattingCodes(msg)
 
         if (msg.startsWith("Your new API key is ")) {
             msg = msg.replace("Your new API key is ", "")

@@ -2,7 +2,7 @@ package it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.util
 
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
-import it.kada49.notenoughaccessories.Constants.ACTIVE_PROFILE
+import it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.configuration.Configuration.activeProfile
 import it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.configuration.Configuration.hypixelAPIKey
 import it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.util.Util.JsonObject
 import it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.util.Util.getUUID
@@ -14,9 +14,9 @@ object Hypixel {
 
         val profiles = JsonObject("https://api.hypixel.net/skyblock/profiles?key=$hypixelAPIKey&uuid=${getUUID()}").asJsonObject["profiles"].asJsonArray
 
-        if (ACTIVE_PROFILE != "") {
+        if (activeProfile != "") {
             for (profile in profiles) {
-                if (profile.asJsonObject["cute_name"].asString == ACTIVE_PROFILE) {
+                if (profile.asJsonObject["cute_name"].asString == activeProfile) {
                     return profile.asJsonObject["profile_id"].asString
                 }
             }
@@ -40,9 +40,9 @@ object Hypixel {
 
         val profiles = JsonObject("https://api.hypixel.net/skyblock/profiles?key=$hypixelAPIKey&uuid=${getUUID()}").asJsonObject["profiles"].asJsonArray
 
-        if (ACTIVE_PROFILE != "") {
+        if (activeProfile != "") {
             for (profile in profiles) {
-                if (profile.asJsonObject["cute_name"].asString == ACTIVE_PROFILE) {
+                if (profile.asJsonObject["cute_name"].asString == activeProfile) {
                     return profile.asJsonObject["cute_name"].asString
                 }
             }

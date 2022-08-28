@@ -19,6 +19,14 @@ object Configuration: Vigilant(file = File("./config/$MOD_ID.toml"), guiTitle = 
     )
     var hypixelAPIKey = ""
 
+    @Property(
+        name = "Hypixel Profile",
+        description = "Your active profile on Hypixel Skyblock",
+        category = "General",
+        type = PropertyType.TEXT
+    )
+    var activeProfile = ""
+
     init {
         initialize()
     }

@@ -138,4 +138,8 @@ object Accessory {
         val stackable = JsonObject("https://kada49.github.io/json/NotEnoughAccessories/notStackable.json")
         return stackable.asJsonObject["previous"].asJsonObject[ID].asString
     }
+
+    fun test() {
+
+    }
 }

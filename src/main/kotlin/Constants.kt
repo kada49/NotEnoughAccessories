@@ -22,6 +22,4 @@ object Constants {
     val LOGGER: Logger = LogManager.getLogger(MOD_ID)
 
     const val HYPIXEL_URL = "https://api.hypixel.net"
-
-    var ACTIVE_PROFILE = ""
 }

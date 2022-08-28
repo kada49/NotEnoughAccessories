@@ -11,6 +11,7 @@ import it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.configurati
 import it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.util.Accessory.allAccessoriesToFile
 import it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.event.Chat
 import net.minecraft.client.Minecraft
+import net.minecraft.client.gui.GuiScreen
 import net.minecraftforge.client.ClientCommandHandler
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.common.Mod
@@ -30,7 +31,7 @@ import java.io.File
 
 object NotEnoughAccessories{
 
-    var configGui: UScreen? = null
+    var configGui: GuiScreen? = null
 
     @EventHandler @Suppress("unused")
     fun init (event: FMLInitializationEvent) {
