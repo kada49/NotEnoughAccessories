@@ -32,14 +32,18 @@ dependencies {
     implementation("gg.essential:essential-$platform:+")
 }
 
-tasks.jar {
-    from(include.files.map { zipTree(it) })
+tasks{
+    processResources {}
+    jar {
+        from(include.files.map { zipTree(it) })
 
-    //Manifest attributes to make Essential work as a mod
-    manifest.attributes(
-        mapOf(
-            "ModSide" to "CLIENT",
-            "TweakClass" to "gg.essential.loader.stage0.EssentialSetupTweaker"
+        //Manifest attributes to make Essential work as a mod
+        manifest.attributes(
+            mapOf(
+                "ModSide" to "CLIENT",
+                "TweakClass" to "gg.essential.loader.stage0.EssentialSetupTweaker"
+            )
         )
-    )
+    }
+
 }
