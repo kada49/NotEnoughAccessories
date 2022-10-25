@@ -1,36 +1,38 @@
 package it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.accessory
 
-import it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.util.Util.JsonObject
+import it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.util.Util.getRequest
+import it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.util.Util.httpGetRequest
 import net.minecraft.client.Minecraft
-import java.io.File
 
 
 class Accessory(id: String) {
     var id: String
     var name: String
-    var rarity: Rarity?
+    var rarity: Rarity
 
     init {
         val path = "${Minecraft.getMinecraft().mcDataDir}/config/NotEnoughAccessories/allAccessories.json"
-        val formatted = JsonObject(File(path))
+        val formatted = getRequest(path)
 
         this.id = id
 
-        var name  = ""
-        var rarity: Rarity? = null
-        for (element in formatted.asJsonObject["accessories"].asJsonArray) {
-            if (element.asJsonObject["id"].asString == this.id) {
-
-                name = element.asJsonObject["name"].asString
+        var name = ""
+        var rarity = Rarity.COMMON
+        for (accessory in formatted.asJsonObject["accessories"].asJsonArray) {
+            if (accessory.asJsonObject["id"].asString == this.id) {
+                name = accessory.asJsonObject["name"].asString
+                if (accessory.asJsonObject["tier"] != null) rarity = Rarity.valueOf(accessory.asJsonObject["tier"].asString)
+                break
             }
         }
-        this.rarity = rarity
+
         this.name = name
+        this.rarity = rarity
     }
 
     fun isUnobtainable(): Boolean {
-        val obj = JsonObject("https://kada49.github.io/json/NotEnoughAccessories/unobtainable.json")
-        if (obj.asJsonObject["unobtainable"].asJsonObject.has(this.id)) { return true }
+        val obj = httpGetRequest("https://kada49.github.io/json/NotEnoughAccessories/unobtainable.json")
+        if (obj.asJsonObject["unobtainable"].asJsonObject.has(this.id)) return true
         return false
     }
 }

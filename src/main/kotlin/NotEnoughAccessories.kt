@@ -1,6 +1,5 @@
 package it.kada49.notenoughaccessories
 
-import gg.essential.universal.UScreen
 import gg.essential.vigilance.Vigilance
 import it.kada49.notenoughaccessories.Constants.MOD_ID
 import it.kada49.notenoughaccessories.Constants.NAME
@@ -8,7 +7,7 @@ import it.kada49.notenoughaccessories.Constants.VERSION
 import it.kada49.notenoughaccessories.command.AccessoryCommand
 import it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.command.NEACommand
 import it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.configuration.Configuration
-import it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.util.Accessory.allAccessoriesToFile
+import it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.util.AccessoryActions.allAccessoriesToFile
 import it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.event.Chat
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiScreen

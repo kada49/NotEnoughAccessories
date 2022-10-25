@@ -4,7 +4,7 @@ package it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.event
 import gg.essential.universal.UChat
 import it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.configuration.Configuration.activeProfile
 import it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.configuration.Configuration.hypixelAPIKey
-import it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.util.Util.sendMessageWithPrefix
+import it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.util.Util.withPrefix
 import net.minecraft.util.EnumChatFormatting
 import net.minecraftforge.client.event.ClientChatReceivedEvent
 import net.minecraftforge.fml.common.eventhandler.EventPriority
@@ -24,14 +24,14 @@ object Chat {
 
             if (msg != activeProfile) {
                 activeProfile = msg
-                UChat.chat(sendMessageWithPrefix("Profile updated to:${EnumChatFormatting.YELLOW} $activeProfile"))
+                UChat.chat(withPrefix("Profile updated to:${EnumChatFormatting.YELLOW} $activeProfile"))
             }
         }
 
         if (msg.startsWith("Your new API key is ")) {
             msg = msg.replace("Your new API key is ", "")
             hypixelAPIKey = msg
-            UChat.chat(sendMessageWithPrefix("Hypixel API key set!"))
+            UChat.chat(withPrefix("Hypixel API key set!"))
         }
     }
 }

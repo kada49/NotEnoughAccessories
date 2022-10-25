@@ -4,15 +4,14 @@ import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.configuration.Configuration.activeProfile
 import it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.configuration.Configuration.hypixelAPIKey
-import it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.util.Util.JsonObject
-import it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.util.Util.getUUID
+import it.kada49.notenoughaccessories.it.kada49.notenoughaccessories.util.Util.httpGetRequest
 import java.net.URL
 
 
 object Hypixel {
-    fun getSkyBlockProfileId() : String {
+    fun getSkyBlockProfileId(uuid: String) : String {
 
-        val profiles = JsonObject("https://api.hypixel.net/skyblock/profiles?key=$hypixelAPIKey&uuid=${getUUID()}").asJsonObject["profiles"].asJsonArray
+        val profiles = httpGetRequest("https://api.hypixel.net/skyblock/profiles?key=$hypixelAPIKey&uuid=$uuid").asJsonObject["profiles"].asJsonArray
 
         if (activeProfile != "") {
             for (profile in profiles) {
@@ -21,24 +20,18 @@ object Hypixel {
                 }
             }
         }
-        //get latest profile
-        var latest: Long = 0
-
-        for (profile in profiles) {
-            val lastSave = profile.asJsonObject["last_save"].asLong
-            if (lastSave > latest) { latest = lastSave }
-        }
-
-        for (profile in profiles) {
-            if (profile.asJsonObject["last_save"].asLong == latest) { return profile.asJsonObject["profile_id"].asString }
+        //get selected profile
+        var i = 0
+        while (true) {
+            if (profiles[i].asJsonObject["selected"].asBoolean) break
+            i++
         }
 
         return profiles[0].asJsonObject["profile_id"].asString
     }
 
-    fun getSkyBlockCuteName(): String {
-
-        val profiles = JsonObject("https://api.hypixel.net/skyblock/profiles?key=$hypixelAPIKey&uuid=${getUUID()}").asJsonObject["profiles"].asJsonArray
+    fun getSkyBlockCuteName(uuid: String): String {
+        val profiles = httpGetRequest("https://api.hypixel.net/skyblock/profiles?key=$hypixelAPIKey&uuid=$uuid").asJsonObject["profiles"].asJsonArray
 
         if (activeProfile != "") {
             for (profile in profiles) {
@@ -47,19 +40,15 @@ object Hypixel {
                 }
             }
         }
-        //get latest profile
-        var latest: Long = 0
 
-        for (profile in profiles) {
-            val lastSave = profile.asJsonObject["last_save"].asLong
-            if (lastSave > latest) { latest = lastSave }
+        //get selected profile
+        var i = 0
+        while (true) {
+            if (profiles[i].asJsonObject["selected"].asBoolean) break
+            i++
         }
 
-        for (profile in profiles) {
-            if (profile.asJsonObject["last_save"].asLong == latest) { return profile.asJsonObject["cute_name"].asString }
-        }
-
-        return profiles[0].asJsonObject["cute_name"].asString
+        return profiles[i].asJsonObject["cute_name"].asString
     }
 
     fun checkAPIKey(): Boolean {
